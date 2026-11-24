@@ -286,7 +286,10 @@ export default {
       }
     }
     if (env.ASSETS) {
-      return env.ASSETS.fetch(new Request(new URL('/', url), { method: 'GET', headers: request.headers }));
+      // The site file is public/index.html (or index_1.html), served at every page address.
+      const page = await env.ASSETS.fetch(new Request(new URL('/', url), { method: 'GET', headers: request.headers }));
+      if (page.status !== 404) return page;
+      return env.ASSETS.fetch(new Request(new URL('/index_1', url), { method: 'GET', headers: request.headers }));
     }
     return new Response('Not found', { status: 404 });
   },
