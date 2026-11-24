@@ -1,0 +1,16 @@
+# Humble Future on Cloudflare Workers.
+# The site is public/index.html; src/worker.js answers /api/* and runs the AI tutor.
+name = "humble-future"
+main = "src/worker.js"
+compatibility_date = "2025-09-01"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# Free Cloudflare AI models: no API key needed.
+[ai]
+binding = "AI"
+
+[observability]
+enabled = true
